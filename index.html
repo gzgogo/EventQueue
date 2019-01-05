@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>事件队列</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="EventQueue.js"></script>
+</head>
+<body>
+  <button onclick="add()">add</button>
+  <script>
+    var eventQueue = new EventQueue();
+    var count = 0;
+
+    function add() {
+      eventQueue.add(function (params, cb) {
+        // 用setTimeout模拟异步调用
+        setTimeout(() => {
+          console.log(params);
+          typeof cb === 'function' && cb();
+        }, 1000);
+      }, count++);
+      }
+  </script>
+</body>
+</html>
